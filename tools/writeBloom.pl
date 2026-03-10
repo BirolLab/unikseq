@@ -2,7 +2,7 @@
 
 #AUTHOR
 #   Rene Warren
-#   rwarren at bcgsc.ca
+#   rwarren at bccrc.ca
 
 #NAME
 #writeBloom
@@ -11,8 +11,8 @@
 
 #DOCUMENTATION
 #   This code was originally developed for PERL LINKS. Please see this readme for details:
-#   https://github.com/bcgsc/LINKS#testing-the-bloom-filters
-#   We hope this code is useful to you -- Please send comments & suggestions to rwarren * bcgsc.ca
+#   https://github.com/BirolLab/LINKS#testing-the-bloom-filters
+#   We hope this code is useful to you -- Please send comments & suggestions to rwarren * bccrc.ca
 #   If you use LINKS, unikseq, the LINKS/unikseq code or ideas, please cite our work
 
 #LICENSE
