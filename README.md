@@ -1,12 +1,12 @@
-[![Release](https://img.shields.io/github/release/bcgsc/unikseq.svg)](https://github.com/bcgsc/unikseq/releases)
-[![Downloads](https://img.shields.io/github/downloads/bcgsc/unikseq/total?logo=github)](https://github.com/bcgsc/unikseq/releases/download/v2.0.1/unikseq-2.0.1.tar.gz)
+[![Release](https://img.shields.io/github/release/BirolLab/unikseq.svg)](https://github.com/BirolLab/unikseq/releases)
+[![Downloads](https://img.shields.io/github/downloads/BirolLab/unikseq/total?logo=github)](https://github.com/BirolLab/unikseq/releases/download/v2.0.1/unikseq-2.0.1.tar.gz)
 [![Conda](https://img.shields.io/conda/dn/bioconda/unikseq?label=Conda)](https://anaconda.org/bioconda/unikseq)
-[![Issues](https://img.shields.io/github/issues/bcgsc/unikseq.svg)](https://github.com/bcgsc/unikseq/issues)
+[![Issues](https://img.shields.io/github/issues/BirolLab/unikseq.svg)](https://github.com/BirolLab/unikseq/issues)
 [![link](https://img.shields.io/badge/unikseq-manuscript-brightgreen)](https://doi.org/10.1002/edn3.438)
 [![link](https://img.shields.io/badge/unikseq2-manuscript-brightgreen)](https://doi.org/10.1111/1755-0998.70014)
-Thank you for your [![Stars](https://img.shields.io/github/stars/bcgsc/unikseq.svg)](https://github.com/bcgsc/unikseq/stargazers)
+Thank you for your [![Stars](https://img.shields.io/github/stars/BirolLab/unikseq.svg)](https://github.com/BirolLab/unikseq/stargazers)
 
-![Logo](https://github.com/bcgsc/unikseq/blob/main/unikseq-logo.png)
+![Logo](https://github.com/BirolLab/unikseq/blob/main/unikseq-logo.png)
 
 # unikseq
 ## Unique (& conserved) region identification in DNA sequences, using k-mers
@@ -62,7 +62,7 @@ Unikseq is developed in PERL and runs on any system where PERL is installed.
 
 Clone and enter the unikseq directory.
 <pre>
-git clone https://github.com/bcgsc/unikseq
+git clone https://github.com/BirolLab/unikseq
 cd unikseq
 </pre>
 
@@ -84,10 +84,10 @@ If PERL is installed on your system, and you're interested in the original uniks
 
 If you are interested in running the Bloom filter version on your system and the pre-built libraries* do not work on your system, please follow these instructions on how to recompile*:
 
-https://github.com/bcgsc/LINKS/tree/d215339720f39c04537d859d7ea4e962c81b8d53#instructions-for-building-the-bloomfilter-perl-module
+https://github.com/BirolLab/LINKS/tree/d215339720f39c04537d859d7ea4e962c81b8d53#instructions-for-building-the-bloomfilter-perl-module
 
 *note: You will need to download a older version of the LINKS long read genome scaffolder to do so (links v1.8.7) available here:
-https://github.com/bcgsc/LINKS/releases/download/v1.8.7/links_v1-8-7.tar.gz
+https://github.com/BirolLab/LINKS/releases/download/v1.8.7/links_v1-8-7.tar.gz
 
 ```diff
 ! *NOTE: The aforementioned conda install will install all dependencies, including the required Bloom filter libraries. We therefore highly recommend installing unikseq with conda (conda install -c bioconda unikseq).
@@ -98,13 +98,13 @@ https://github.com/bcgsc/LINKS/releases/download/v1.8.7/links_v1-8-7.tar.gz
 
 Refer to the README.md file on how to install and run unikseq. Read the 
 [![link](https://img.shields.io/badge/unikseq-manuscript-brightgreen)](https://doi.org/10.1002/edn3.438) for additional implementation details.
-![poster](https://github.com/bcgsc/unikseq/blob/main/unikseq-recomb2023poster.png)
+![poster](https://github.com/BirolLab/unikseq/blob/main/unikseq-recomb2023poster.png)
 Warren RL, Allison MJ, Lopez ML, Acharya-Patel N, Coombe L, Yang CL, Helbing CC, Birol I, "Unique region identification in genomes using a k-mer approach", 27th Annual International Conference on Research in Computational Molecular Biology (RECOMB), RECOMB, RECOMB-Seq and RECOMB-CG, Istanbul, Turkey, April 2023.
 
 
 ## Citing unikseq <a name=cite></a>
 
-Thank you for your [![Stars](https://img.shields.io/github/stars/bcgsc/unikseq.svg)](https://github.com/bcgsc/unikseq/stargazers) and for using, developing and promoting this free software!
+Thank you for your [![Stars](https://img.shields.io/github/stars/BirolLab/unikseq.svg)](https://github.com/BirolLab/unikseq/stargazers) and for using, developing and promoting this free software!
 
 If you use unikseq in your research, please cite: 
 (1)
@@ -433,7 +433,7 @@ If the run is successful, the -unique.fa FASTA output should contain 4 sequences
 
 ## Algorithm design and implementation <a name=algorithm></a>
 
-![unikseqMethod](https://github.com/bcgsc/unikseq/blob/main/unikseq-method.png)
+![unikseqMethod](https://github.com/BirolLab/unikseq/blob/main/unikseq-method.png)
 The algorithm starts by first parsing FASTA sequence(s) supplied by the user as “outgroup” (-o option) and “ingroup” (-i option) and extracting every word of length k (k-mers, -k option) and their reverse complement and storing each in respective two-dimensional hash (or Bloom filter) data structures, keeping track of the k-mer occurrence in each FASTA entry for either sets. We point out that in/outgroup sequences need not start at the same position, nor be represented on the same strand since unikseq is k-mer based, so no specific DNA sequence formatting is required other than supplying a FASTA-formatted file (e.g. no need to adjust the sequence start for mtDNA genomes). 
 
 The search for stretches of potentially unique sequence in a reference sequence (-r option) begins with the 5’ to 3’ extraction of a forward-strand k-mer and querying of the above two data structures for 1) exclusion of the k-mer in the outgroup and 2) inclusion of the k-mer in the ingroup, moving the k-mer frame over base by base until the entire FASTA sequence is read and all reference k-mers have been interrogated. When a sequence k-mer is not found in the outgroup data structure, it is deemed unique and its position and coverage in the outgroup set is tracked and a unique sequence stretch is initialized if the k-mer demarks the beginning of a new unique region. A record of the k-mer’s presence in the ingroup data structure is also kept for the purpose of plotting and evaluating the overall conservation of the unique sequence stretch in the ingroup (see the -p option described below). In the event that a unique k-mer follows a k-mer previously identified as unique, the last unique base is concatenated onto the growing unique sequence stretch on the 3’-end. This process is repeated until the end of the FASTA reference sequence is reached or until a condition is no longer met, including when the next k-mer is found to be non-unique in the outgroup set. 
@@ -442,7 +442,7 @@ To facilitate the detection of unique regions that may be interspersed with non-
 
 When the unique sequence can no longer be extended, it will be written to a FASTA file only when 1) it has reached a length of at least (-s option) bp in size, 2) its constituent k-mers have been identified, on average proportion, in at least (-p option) % of ingroup sequences and, overall, 3) those k-mers are at least (-u option) % unique, as specified by -l and -m. 
 
-Unikseq also outputs a tab-separated value (tsv) file that tracks, at each coordinate relative to the reference sequence, the proportion of corresponding k-mers in the outgroup and ingroup sets, and was used to generate the butterfly plots (below). Instructions and code for generating the butterfly plots in the R programming language are both available from the repository at the URL below. The intended use-case of unikseq is for identification of unique sequences in mitochrondrial [genome] and similarly short sequences (In initial tests comparing 52 x 2-5Mbp bacterial [HMP mock community] genomes, unikseq ran in 5m and required 54GB RAM). For larger, Gbp-size genomes, we recommend the use of unikseq-Bloom, included in the v1.3 commit of the code. Unikseq is developed in PERL and runs on any system where PERL is installed, requiring no additional library. It is distributed under GPLv3 license and available freely from github (https://github.com/bcgsc/unikseq).
+Unikseq also outputs a tab-separated value (tsv) file that tracks, at each coordinate relative to the reference sequence, the proportion of corresponding k-mers in the outgroup and ingroup sets, and was used to generate the butterfly plots (below). Instructions and code for generating the butterfly plots in the R programming language are both available from the repository at the URL below. The intended use-case of unikseq is for identification of unique sequences in mitochrondrial [genome] and similarly short sequences (In initial tests comparing 52 x 2-5Mbp bacterial [HMP mock community] genomes, unikseq ran in 5m and required 54GB RAM). For larger, Gbp-size genomes, we recommend the use of unikseq-Bloom, included in the v1.3 commit of the code. Unikseq is developed in PERL and runs on any system where PERL is installed, requiring no additional library. It is distributed under GPLv3 license and available freely from github (https://github.com/BirolLab/unikseq).
 
  
 ## Quick reference <a name=quickref></a>
@@ -462,7 +462,7 @@ Below is a reference guide for controlling the [stringency &] output of unikseq.
 
 ## Generating "butterfly" plots <a name=bplot></a>
 For user convenience, an R script is included to facilitate data visualization. Refer to `butterfly-plot.r` included with the unikseq distribution. You may test it using the example data provided; Please refer to the testdata folder README.md for instructions on how to generate butterfly plots.
-![UnikseqButterflyPlot](https://github.com/bcgsc/unikseq/blob/main/unikseq-butterfly.png)
+![UnikseqButterflyPlot](https://github.com/BirolLab/unikseq/blob/main/unikseq-butterfly.png)
 Example butterfly-type plot generated from the testdata (and run parameters) provided.
 
 

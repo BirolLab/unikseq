@@ -2,7 +2,7 @@
 
 #AUTHOR
 # Rene Warren
-# rwarren at bcgsc.ca
+# rwarren at bccrc.ca
 
 #NAME
 # unikseq
@@ -12,7 +12,7 @@
 
 #DOCUMENTATION
 # README.md distributed with this software
-# We hope this code is useful to you -- Please send comments & suggestions to rwarren * bcgsc.ca
+# We hope this code is useful to you -- Please send comments & suggestions to rwarren * bccrc.ca
 
 #LICENSE
 # unikseq Copyright (c) 2020-present British Columbia Cancer Agency Branch. All rights reserved.
